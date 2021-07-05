@@ -22,6 +22,7 @@ const getCountries = () => {
         const singleCountry = state.countries.find(
           (country) => country.name.toLowerCase() === name.toLowerCase()
         );
+        tempState.borders = [];
 
         if (singleCountry) {
           singleCountry.borders.forEach((countryCode) => {
