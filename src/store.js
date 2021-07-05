@@ -11,8 +11,30 @@ const getCountries = () => {
     subscribe,
     add: (countries) =>
       update((state) => {
-        const updatedCountries = [...state.countries, ...countries];
-        return updatedCountries;
+        const tempState = { ...state };
+        tempState.countries = [...state.countries, ...countries];
+        return tempState;
+      }),
+    singleCountry: (name) =>
+      update((state) => {
+        const tempState = { ...state };
+        const singleCountry = state.countries.find(
+          (country) => country.name.toLowerCase() === name.toLowerCase()
+        );
+
+        if (singleCountry) {
+          singleCountry.borders.forEach((countryCode) => {
+            let borderCountry = state.countries.find((item) => {
+              return (
+                item.alpha3Code.toLowerCase() === countryCode.toLowerCase()
+              );
+            });
+
+            tempState.borders = [...tempState.borders, borderCountry.name];
+          });
+        }
+        tempState.country = [singleCountry];
+        return tempState;
       }),
   };
 };

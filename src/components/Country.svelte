@@ -1,24 +1,20 @@
 <script>
   export let name;
-  let country;
+  // let country;
   import { countries } from "../store";
-  import { onMount, onDestroy } from "svelte";
+  import { onMount } from "svelte";
   import { getCountries } from "../api";
 
   onMount(async () => {
-    if ($countries.length <= 0) {
+    if ($countries.countries.length <= 0) {
       const data = await getCountries();
       countries.add(data);
     }
-    country = $countries.find(
-      (country) => country.name.toLowerCase() === name.toLowerCase()
-    );
-    console.log(country);
+    countries.singleCountry(name);
   });
 </script>
 
-{#if country}
-  <!-- content here -->
+{#each $countries.country as country}
   <div class="card__detail">
     <img src={country.flag} alt={country.name} />
     <div class="card__main">
@@ -29,7 +25,11 @@
       <p>Region: <span>{country.region}</span></p>
       <p>Sub Region: <span>{country.subregion}</span></p>
       <p>Capital: <span>{country.capital}</span></p>
-      <p>Border Countries: <span>{country.capital}</span></p>
+      <p>
+        Border Countries: {#each $countries.borders as border (border)}
+          <span>{border}</span>
+        {/each}
+      </p>
     </div>
     <div class="card__main">
       <p>
@@ -49,8 +49,11 @@
       </p>
     </div>
   </div>
-{/if}
+{:else}
+  No country yet
+{/each}
 
+<!-- content here -->
 <style>
   .card__detail {
     display: grid;
