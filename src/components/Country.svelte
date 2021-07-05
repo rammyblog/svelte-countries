@@ -6,6 +6,7 @@
   import { getCountries } from "../api";
   import Border from "./Border.svelte";
   import Loading from "./Loading.svelte";
+  import { Link } from "svelte-routing";
 
   onMount(async () => {
     if ($countries.countries.length <= 0) {
@@ -17,6 +18,10 @@
 </script>
 
 {#each $countries.country as country}
+  <button class="btn no-color">
+    <i class="fas fa-arrow-left" />
+    <Link to="/">Back</Link></button
+  >
   <div class="card__detail">
     <img src={country.flag} alt={country.name} />
     <div class="card__main">
@@ -62,10 +67,17 @@
     grid-template-columns: 1.5fr 2fr 1fr !important;
     grid-gap: 0 30px;
     gap: 0 30px;
+    margin-top: 1rem;
   }
   img {
     width: 100%;
   }
+
+  .no-color a,
+  .no-color a:visited {
+    color: #333;
+  }
+
   @media (max-width: 600px) {
     .card__detail {
       display: block;
