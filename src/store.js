@@ -13,4 +13,17 @@ const getCountries = () => {
   };
 };
 
+const singleCountry = () => {
+  const { subscribe, update, set } = writable([]);
+
+  return {
+    subscribe,
+    get: (name) =>
+      update((state) => {
+        const updatedCountries = [...state, ...countries];
+        return updatedCountries;
+      }),
+  };
+};
+
 export const countries = getCountries();
