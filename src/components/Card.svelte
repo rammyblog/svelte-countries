@@ -1,17 +1,22 @@
-<script></script>
+<script>
+  export let name;
+  export let population;
+  export let region;
+  export let capital;
+  export let flag;
+</script>
 
 <div class="card">
   <div class="card__image">
-    <img src="https://restcountries.eu/data/nga.svg" alt="Nigeria flag" />
+    <img src={flag} alt={name} />
   </div>
   <div class="card__details">
-    <p class="card__name">Nigeria</p>
-    <p class="card__info">Population: <span>186,988,000</span></p>
-    <p class="card__info">Region: <span>Africa</span></p>
-    <p class="card__info">Capital: <span>Abuja</span></p>
+    <p class="card__name">{name}</p>
+    <p class="card__info">Population: <span>{population}</span></p>
+    <p class="card__info">Region: <span>{region}</span></p>
+    <p class="card__info">Capital: <span>{capital}</span></p>
   </div>
 </div>
-
 
 <style>
   .card {
@@ -20,7 +25,6 @@
     /* min-width: 240px; */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin-bottom: 0.8rem;
-    
   }
 
   img {
@@ -75,6 +79,4 @@
       max-width: 400px;
     }
   }
-
-  
 </style>

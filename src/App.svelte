@@ -1,26 +1,55 @@
 <script>
+  // Import
   import Card from "./components/Card.svelte";
+  import Navbar from "./components/Navbar.svelte";
   import Search from "./components/Search.svelte";
   import Select from "./components/Select.svelte";
+  import { paginate, LightPaginationNav } from "svelte-paginate";
+
+  import { onMount, onDestroy } from "svelte";
+  import { getCountries } from "./api";
+  import { countries } from "./store";
+
+  // Pagination
+  let items;
+  let currentPage = 1;
+  let pageSize = 6;
+  const unsubscribe = countries.subscribe((value) => {
+    items = value;
+  });
+  $: paginatedItems = paginate({ items, pageSize, currentPage });
+
+  // On mount
+  onMount(async () => {
+    const data = await getCountries();
+    countries.add(data);
+  });
+  onDestroy(unsubscribe);
 </script>
 
-<main>
+<Navbar />
+<div class="main">
   <div class="query-box">
     <Search />
     <Select />
   </div>
   <div class="card-display">
-    <Card />
-    <Card />
-    <Card />
-    <Card />
-    <Card />
-    <Card />
+    {#each paginatedItems as country (country.numericCode)}
+      <Card {...country} />
+    {/each}
   </div>
-</main>
+  <LightPaginationNav
+    totalItems={items.length}
+    {pageSize}
+    {currentPage}
+    limit={1}
+    showStepOptions={true}
+    on:setPage={(e) => (currentPage = e.detail.page)}
+  />
+</div>
 
 <style>
-  main {
+  .main {
     margin: 50px;
   }
   .card-display {
