@@ -9,13 +9,15 @@
     <Card />
     <Card />
     <Card />
+    <Card />
   </div>
 </main>
 
 <style>
   .card-display {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-wrap: wrap;
+    margin: 50px;
   }
 </style>

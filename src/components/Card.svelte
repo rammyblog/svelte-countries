@@ -12,13 +12,15 @@
   </div>
 </div>
 
+
 <style>
   .card {
-    max-width: 320px;
+    max-width: 350px;
     width: 100%;
-    min-width: 240px;
+    /* min-width: 240px; */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin-bottom: 0.8rem;
+    
   }
 
   img {
@@ -43,4 +45,36 @@
     font-weight: normal;
     font-size: 0.9rem;
   }
+
+  @media (max-width: 1218px) {
+    .card {
+      max-width: 320px;
+    }
+  }
+
+  @media (max-width: 970px) {
+    .card {
+      max-width: 250px;
+    }
+  }
+
+  @media (max-width: 750px) {
+    .card {
+      max-width: 200px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .card {
+      max-width: 250px;
+    }
+  }
+
+  @media (max-width: 514px) {
+    .card {
+      max-width: 400px;
+    }
+  }
+
+  
 </style>
