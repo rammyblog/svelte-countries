@@ -1,13 +1,17 @@
 import { writable } from "svelte/store";
 
 const getCountries = () => {
-  const { subscribe, update, set } = writable([]);
+  const { subscribe, update, set } = writable({
+    countries: [],
+    borders: [],
+    country: [],
+  });
 
   return {
     subscribe,
     add: (countries) =>
       update((state) => {
-        const updatedCountries = [...state, ...countries];
+        const updatedCountries = [...state.countries, ...countries];
         return updatedCountries;
       }),
   };
@@ -18,7 +22,7 @@ const singleCountry = () => {
 
   return {
     subscribe,
-    get: (name) =>
+    get: (name, countrie) =>
       update((state) => {
         const updatedCountries = [...state, ...countries];
         return updatedCountries;
