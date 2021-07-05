@@ -4,6 +4,7 @@
   import { countries } from "../store";
   import { onMount } from "svelte";
   import { getCountries } from "../api";
+  import Border from "./Border.svelte";
 
   onMount(async () => {
     if ($countries.countries.length <= 0) {
@@ -27,7 +28,7 @@
       <p>Capital: <span>{country.capital}</span></p>
       <p>
         Border Countries: {#each $countries.borders as border (border)}
-          <span>{border}</span>
+          <span><Border name={border} /></span>
         {/each}
       </p>
     </div>
