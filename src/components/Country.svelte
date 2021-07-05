@@ -51,7 +51,7 @@
       </p>
       <p>
         Languages: {#each country.languages as language (language.name)}
-          <span>{language.name}</span>
+          <span>{language.name}, </span>
         {/each}
       </p>
     </div>
