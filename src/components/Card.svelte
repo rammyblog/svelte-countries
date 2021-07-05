@@ -7,12 +7,13 @@
 </script>
 
 <div class="card">
-  <div class="card__image">
-    <img src={flag} alt={name} />
-  </div>
+  <img class="card__image" src={flag} alt={name} />
+
   <div class="card__details">
     <p class="card__name">{name}</p>
-    <p class="card__info">Population: <span>{population}</span></p>
+    <p class="card__info">
+      Population: <span>{population.toLocaleString("en-US")}</span>
+    </p>
     <p class="card__info">Region: <span>{region}</span></p>
     <p class="card__info">Capital: <span>{capital}</span></p>
   </div>
@@ -27,11 +28,11 @@
     margin-bottom: 0.8rem;
   }
 
-  img {
-    max-width: 100%;
-    height: auto;
+  .card__image {
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
   }
-
   .card__name {
     font-weight: bold;
     margin-bottom: 10px;

@@ -28,6 +28,10 @@
     /* width: 100%; */
     padding: 10px;
     text-align: center;
-    border: none
+    border: none;
+  }
+
+  .input-field:focus-visible {
+    outline-width: 0;
   }
 </style>

@@ -65,3 +65,6 @@ button:not(:disabled):active {
 button:focus {
   border-color: #666;
 }
+input {
+  outline: none;
+}
