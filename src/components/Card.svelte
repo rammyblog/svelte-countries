@@ -4,13 +4,14 @@
   export let region;
   export let capital;
   export let flag;
+  import { Link } from "svelte-routing";
 </script>
 
 <div class="card">
   <img class="card__image" src={flag} alt={name} />
 
   <div class="card__details">
-    <p class="card__name">{name}</p>
+    <p class="card__name"><Link to={`/country/${name}`}>{name}</Link></p>
     <p class="card__info">
       Population: <span>{population.toLocaleString("en-US")}</span>
     </p>

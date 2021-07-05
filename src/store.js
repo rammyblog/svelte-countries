@@ -5,6 +5,7 @@ const getCountries = () => {
     countries: [],
     borders: [],
     country: [],
+    loading: false,
   });
 
   return {

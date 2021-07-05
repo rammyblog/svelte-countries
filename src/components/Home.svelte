@@ -14,7 +14,7 @@
   let currentPage = 1;
   let pageSize = 6;
   const unsubscribe = countries.subscribe((value) => {
-    items = value;
+    items = value.countries;
   });
   $: paginatedItems = paginate({ items, pageSize, currentPage });
 

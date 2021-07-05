@@ -5,6 +5,7 @@
   import { onMount } from "svelte";
   import { getCountries } from "../api";
   import Border from "./Border.svelte";
+  import Loading from "./Loading.svelte";
 
   onMount(async () => {
     if ($countries.countries.length <= 0) {
@@ -51,7 +52,7 @@
     </div>
   </div>
 {:else}
-  No country yet
+  <Loading />
 {/each}
 
 <!-- content here -->
@@ -64,5 +65,10 @@
   }
   img {
     width: 100%;
+  }
+  @media (max-width: 600px) {
+    .card__detail {
+      display: block;
+    }
   }
 </style>
