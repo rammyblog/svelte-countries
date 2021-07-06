@@ -1,6 +1,5 @@
 import { writable } from "svelte/store";
-  import shuffle from "./utils/shuffle";
-
+import shuffle from "./utils/shuffle";
 
 const getCountries = () => {
   const { subscribe, update, set } = writable({
@@ -44,15 +43,14 @@ const getCountries = () => {
     filter: (region) =>
       update((state) => {
         const tempState = { ...state };
-        if(region === 'all'){
-          tempState.filteredCountries = shuffle(tempState.countries)
-        }else{
-
-          tempState.filteredCountries = shuffle(tempState.countries.filter(
+        if (region === "all") {
+          tempState.filteredCountries = shuffle(tempState.countries);
+        } else {
+          tempState.filteredCountries = tempState.countries.filter(
             (country) => country.region.toLowerCase() === region.toLowerCase()
-          ));
+          );
         }
-        return tempState
+        return tempState;
       }),
   };
 };

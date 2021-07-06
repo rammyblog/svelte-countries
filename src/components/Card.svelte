@@ -8,7 +8,11 @@
 </script>
 
 <div class="card">
-  <img class="card__image" src={flag} alt={name} />
+  <img
+    class="card__image"
+    src={flag ? flag : "https://restcountries.eu/data/geo.svg"}
+    alt={name}
+  />
 
   <div class="card__details">
     <p class="card__name"><Link to={`/country/${name}`}>{name}</Link></p>
