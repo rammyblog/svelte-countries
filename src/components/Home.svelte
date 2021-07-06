@@ -43,7 +43,10 @@
   <Select on:changeRegion={changeRegion} />
 </div>
 {#if loading}
+<div class='center'>
+
   <Loading />
+</div>
 {:else}
   <div class="card-display">
     {#each paginatedItems as country (country.numericCode)}

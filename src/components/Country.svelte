@@ -57,7 +57,9 @@
     </div>
   </div>
 {:else}
-  <Loading />
+  <div class="center">
+    <Loading />
+  </div>
 {/each}
 
 <!-- content here -->
@@ -71,11 +73,6 @@
   }
   img {
     width: 100%;
-  }
-
-  .no-color a,
-  .no-color a:visited {
-    color: #333;
   }
 
   @media (max-width: 600px) {
