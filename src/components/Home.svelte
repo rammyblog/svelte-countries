@@ -2,33 +2,38 @@
   import Search from "./Search.svelte";
   import Select from "./Select.svelte";
   import Card from "./Card.svelte";
+  import Loading from "./Loading.svelte";
 
   import { paginate, LightPaginationNav } from "svelte-paginate";
   import { onMount, onDestroy } from "svelte";
   import { getCountries } from "../api";
   import { countries } from "../store";
-  import shuffle from "../utils/shuffle";
 
   // Pagination
   let items;
   let currentPage = 1;
   let pageSize = 6;
+
+  // Loading state
+  let loading = false;
+
   const unsubscribe = countries.subscribe((value) => {
     items = value.filteredCountries;
   });
   $: paginatedItems = paginate({ items, pageSize, currentPage });
 
-  const changeRegion = ({detail}) => {
-    countries.filter(detail.region)
-    items = $countries.filteredCountries
-  }
+  const changeRegion = async ({ detail }) => {
+    countries.filter(detail.region);
+    items = $countries.filteredCountries;
+  };
 
   // On mount
   onMount(async () => {
+    loading = true;
     const data = await getCountries();
     countries.add(data);
-    countries.filter('all')
-
+    countries.filter("all");
+    loading = false;
   });
   onDestroy(unsubscribe);
 </script>
@@ -37,19 +42,23 @@
   <Search />
   <Select on:changeRegion={changeRegion} />
 </div>
-<div class="card-display">
-  {#each paginatedItems as country (country.numericCode)}
-    <Card {...country} />
-  {/each}
-</div>
-<LightPaginationNav
-  totalItems={items.length}
-  {pageSize}
-  {currentPage}
-  limit={1}
-  showStepOptions={true}
-  on:setPage={(e) => (currentPage = e.detail.page)}
-/>
+{#if loading}
+  <Loading />
+{:else}
+  <div class="card-display">
+    {#each paginatedItems as country (country.numericCode)}
+      <Card {...country} />
+    {/each}
+  </div>
+  <LightPaginationNav
+    totalItems={items.length}
+    {pageSize}
+    {currentPage}
+    limit={1}
+    showStepOptions={true}
+    on:setPage={(e) => (currentPage = e.detail.page)}
+  />
+{/if}
 
 <style>
   .card-display {

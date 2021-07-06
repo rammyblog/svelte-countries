@@ -43,13 +43,17 @@ const getCountries = () => {
     filter: (region) =>
       update((state) => {
         const tempState = { ...state };
+        state.loading = true;
         if (region === "all") {
           tempState.filteredCountries = shuffle(tempState.countries);
         } else {
           tempState.filteredCountries = tempState.countries.filter(
-            (country) => country.region.toLowerCase() === region.toLowerCase()
+            (country) => {
+              return country.region.toLowerCase() === region.toLowerCase();
+            }
           );
         }
+        tempState.loading = false;
         return tempState;
       }),
   };
