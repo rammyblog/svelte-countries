@@ -14,21 +14,28 @@
   let currentPage = 1;
   let pageSize = 6;
   const unsubscribe = countries.subscribe((value) => {
-    items = value.countries;
+    items = value.filteredCountries;
   });
   $: paginatedItems = paginate({ items, pageSize, currentPage });
+
+  const changeRegion = ({detail}) => {
+    countries.filter(detail.region)
+    items = $countries.filteredCountries
+  }
 
   // On mount
   onMount(async () => {
     const data = await getCountries();
-    countries.add(shuffle(data));
+    countries.add(data);
+    countries.filter('all')
+
   });
   onDestroy(unsubscribe);
 </script>
 
 <div class="query-box">
   <Search />
-  <Select />
+  <Select on:changeRegion={changeRegion} />
 </div>
 <div class="card-display">
   {#each paginatedItems as country (country.numericCode)}
