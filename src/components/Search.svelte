@@ -1,4 +1,6 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher();
   let query;
 </script>
 
@@ -9,6 +11,7 @@
     type="text"
     bind:value={query}
     placeholder="Search for a country"
+    on:keyup={() => dispatch("search", { query })}
   />
 </div>
 

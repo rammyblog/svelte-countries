@@ -22,8 +22,13 @@
   });
   $: paginatedItems = paginate({ items, pageSize, currentPage });
 
-  const changeRegion = async ({ detail }) => {
-    countries.filter(detail.region);
+  const changeRegion = ({ detail }) => {
+    countries.filter(detail.region, null);
+    items = $countries.filteredCountries;
+  };
+
+  const search = ({ detail }) => {
+    countries.filter(null, detail.query);
     items = $countries.filteredCountries;
   };
 
@@ -39,18 +44,19 @@
 </script>
 
 <div class="query-box">
-  <Search />
+  <Search on:search={search} />
   <Select on:changeRegion={changeRegion} />
 </div>
 {#if loading}
-<div class='center'>
-
-  <Loading />
-</div>
+  <div class="center">
+    <Loading />
+  </div>
 {:else}
   <div class="card-display">
     {#each paginatedItems as country (country.numericCode)}
       <Card {...country} />
+    {:else}
+      <p>No country found! Maybe you need to create your Kingdom</p>
     {/each}
   </div>
   <LightPaginationNav
@@ -68,6 +74,7 @@
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    min-height: 100vh;
   }
 
   .query-box {

@@ -2,10 +2,10 @@
 
 <nav class="navbar">
   <h2>Where in the world</h2>
-  <div class="mode-toggle">
+  <!-- <div class="mode-toggle">
     <i class="fas fa-sun" />
     <p>Light mode</p>
-  </div>
+  </div> -->
 </nav>
 
 <style>
@@ -17,12 +17,6 @@
   }
 
   .navbar h2 {
-    cursor: pointer;
-  }
-
-  .mode-toggle {
-    display: flex;
-    align-items: center;
     cursor: pointer;
   }
 </style>

@@ -6,7 +6,7 @@ const getCountries = () => {
     countries: [],
     borders: [],
     country: [],
-    loading: false,
+
     filteredCountries: [],
   });
 
@@ -40,20 +40,30 @@ const getCountries = () => {
         tempState.country = [singleCountry];
         return tempState;
       }),
-    filter: (region) =>
+    filter: (region, name) =>
       update((state) => {
         const tempState = { ...state };
-        state.loading = true;
         if (region === "all") {
           tempState.filteredCountries = shuffle(tempState.countries);
-        } else {
+          return tempState;
+        }
+        if (region && !name) {
           tempState.filteredCountries = tempState.countries.filter(
             (country) => {
               return country.region.toLowerCase() === region.toLowerCase();
             }
           );
+        } else if (!region && name) {
+          tempState.filteredCountries = tempState.countries.filter(
+            (country) => {
+              return country.name.toLowerCase().includes(name.toLowerCase());
+            }
+          );
+        } else {
+          tempState.filteredCountries = shuffle(tempState.countries);
+          return tempState;
         }
-        tempState.loading = false;
+
         return tempState;
       }),
   };
