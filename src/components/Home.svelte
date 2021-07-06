@@ -74,7 +74,7 @@
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    min-height: 100vh;
+    /* min-height: 100vh; */
   }
 
   .query-box {
